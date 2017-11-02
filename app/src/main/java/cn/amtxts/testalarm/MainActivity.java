@@ -30,14 +30,15 @@ public class MainActivity extends AppCompatActivity {
         amIntent.putExtra("type", "AUTO_SERVER_CARD");
         PendingIntent pi = PendingIntent.getBroadcast(this, 0, amIntent, 0);
         Log.e("MainActivity", "SystemClock.elapsedRealtime()" + SystemClock.elapsedRealtime());
-        long triggerAtTime = SystemClock.elapsedRealtime() + time * 60 * 1000;
-        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, time * 60 * 1000, pi);
+        long triggerAtTime = SystemClock.elapsedRealtime() + time * 1000;
+        //intervalMillis不能小于1*60*1000ms
+        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, time * 1000, pi);
     }
 
     private long getTime() {
         String text = etTime.getText().toString();
         long time = 2;
-        if (text.length()>0){
+        if (text.length() > 0) {
             time = Long.valueOf(text);
         }
         return time;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         amIntent.setAction("START_CARD_SERVICE");
         amIntent.putExtra("type", "AUTO_SERVER_CARD");
         PendingIntent pi = PendingIntent.getBroadcast(this, 0, amIntent, 0);
-        long triggerAtTime = SystemClock.elapsedRealtime() + time * 60 * 1000;
+        long triggerAtTime = SystemClock.elapsedRealtime() + time * 1000;
         am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
     }
 
